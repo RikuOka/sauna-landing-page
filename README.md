@@ -1,0 +1,2 @@
+# sauna-landing-page
+サウナについて
