@@ -2,8 +2,8 @@ export interface Post {
   id: string;
   title: string;
   content: string;
-  date: string;
-  tags: string[];
+  date: Date; // stringからDateに変更
+  tags: string; // string[]からstringに変更
   thumbnail: string;
 }
 

@@ -15,17 +15,12 @@ export default function PostPage() {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const res = await fetch('/api/posts');
+        const res = await fetch(`/api/posts?id=${id}`);
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
         }
-        const data: Post[] = await res.json();
-        const foundPost = data.find(p => p.id === id);
-        if (foundPost) {
-          setPost(foundPost);
-        } else {
-          setError('記事が見つかりませんでした。');
-        }
+        const data: Post = await res.json(); // Expect a single Post object
+        setPost(data);
       } catch (e: any) {
         setError(e.message);
       } finally {
@@ -50,8 +45,8 @@ export default function PostPage() {
           {post.date && !isNaN(new Date(post.date).getTime()) ? new Intl.DateTimeFormat('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' }).format(new Date(post.date)) : '日付不明'}
         </p>
         <div className="flex flex-wrap gap-2 mb-6">
-          {post.tags.map((tag, index) => (
-            <span key={index} className="bg-indigo-100 text-indigo-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-indigo-900 dark:text-indigo-300">
+          {(post.tags ? post.tags.split(',') : []).map((tag, index) => (
+            <span key={index} className="bg-gray-200 text-gray-700 text-xs font-medium px-2.5 py-0.5 rounded-full">
               {tag}
             </span>
           ))}
@@ -67,12 +62,15 @@ export default function PostPage() {
             />
           </div>
         )}
-        <div className="prose prose-lg max-w-none text-gray-800 leading-relaxed">
+        <div className="prose prose-lg max-w-none text-gray-800 leading-relaxed mt-6">
           <p>{post.content}</p>
         </div>
-        <div className="mt-8">
-          <Link href="/" className="text-indigo-600 hover:text-indigo-800 font-medium">
+        <div className="mt-8 flex justify-between items-center">
+          <Link href="/" className="text-indigo-600 hover:text-indigo-800 font-medium transition-colors duration-200">
             &larr; ブログ一覧に戻る
+          </Link>
+          <Link href={`/edit-post/${post.id}`} className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200">
+            編集
           </Link>
         </div>
       </div>

@@ -19,7 +19,7 @@ export const PostForm: React.FC<PostFormProps> = ({ initialData, onSubmit, butto
   const [title, setTitle] = useState(initialData?.title || '');
   const [content, setContent] = useState(initialData?.content || '');
   const [date, setDate] = useState(initialData?.date || '');
-  const [tags, setTags] = useState(initialData?.tags.join(', ') || '');
+  const [tags, setTags] = useState(Array.isArray(initialData?.tags) ? initialData.tags.join(', ') : initialData?.tags || '');
   const [thumbnail, setThumbnail] = useState<File | string>(initialData?.thumbnail || '');
   const [thumbnailPreview, setThumbnailPreview] = useState<string | null>(initialData?.thumbnail || null);
 
@@ -83,7 +83,7 @@ export const PostForm: React.FC<PostFormProps> = ({ initialData, onSubmit, butto
             name="title"
             type="text"
             required
-            className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            className="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             placeholder="タイトル"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -96,7 +96,7 @@ export const PostForm: React.FC<PostFormProps> = ({ initialData, onSubmit, butto
             name="content"
             required
             rows={10}
-            className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            className="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             placeholder="記事の内容"
             value={content}
             onChange={(e) => setContent(e.target.value)}
@@ -108,7 +108,7 @@ export const PostForm: React.FC<PostFormProps> = ({ initialData, onSubmit, butto
             id="date"
             name="date"
             type="date"
-            className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            className="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             value={date}
             onChange={(e) => setDate(e.target.value)}
           />
@@ -119,7 +119,7 @@ export const PostForm: React.FC<PostFormProps> = ({ initialData, onSubmit, butto
             id="tags"
             name="tags"
             type="text"
-            className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            className="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             placeholder="タグ (例: サウナ, 水風呂, ととのい)"
             value={tags}
             onChange={(e) => setTags(e.target.value)}
@@ -146,7 +146,7 @@ export const PostForm: React.FC<PostFormProps> = ({ initialData, onSubmit, butto
       <div>
         <button
           type="submit"
-          className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200"
         >
           {buttonText}
         </button>

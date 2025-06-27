@@ -13,6 +13,16 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      // ここにアニメーションを追加
+      keyframes: {
+        'spin-slow': {
+          from: { transform: 'translate(-50%, -50%) rotate(0deg)' },
+          to: { transform: 'translate(-50%, -50%) rotate(360deg)' },
+        }
+      },
+      animation: {
+        'spin-slow': 'spin-slow 20s linear infinite',
+      }
     },
   },
   plugins: [],

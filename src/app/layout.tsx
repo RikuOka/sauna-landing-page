@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Link from 'next/link';
-import GlobalSearchBar from '@/components/GlobalSearchBar';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,13 +18,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <nav className="bg-gray-800 p-4 text-white flex justify-between items-center">
+        <nav className="bg-gray-900 p-4 text-white flex justify-between items-center shadow-lg">
           <ul className="flex space-x-4">
-            <li><Link href="/">ホーム</Link></li>
-            <li><Link href="/sauna">サウナとは</Link></li>
-            <li><Link href="/new-post">新規作成</Link></li>
+            <li><Link href="/" className="hover:text-yellow-400 transition-colors duration-200">ホーム</Link></li>
+            <li><Link href="/sauna" className="hover:text-yellow-400 transition-colors duration-200">サウナとは</Link></li>
+            <li><Link href="/new-post" className="hover:text-yellow-400 transition-colors duration-200">新規作成</Link></li>
           </ul>
-          <GlobalSearchBar />
         </nav>
         {children}
       </body>
